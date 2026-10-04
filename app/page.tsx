@@ -6,6 +6,8 @@ import { Header } from "@/components/Header";
 import { MessageList } from "@/components/MessageList";
 import { Composer } from "@/components/Composer";
 
+type ChatStatus = "submitted" | "streaming" | "ready" | "error";
+
 const STORAGE_KEY = "free-llm-chat-history";
 const THEME_KEY = "llm-chat-theme";
 
@@ -74,7 +76,7 @@ export default function ChatPage() {
     body: {
       model: "google/gemma-2-9b-it:free",
     },
-  });
+  }) as { messages: typeof messages; append: typeof append; stop: typeof stop; status: ChatStatus; error: typeof error };
 
   const handleThemeToggle = useCallback(() => {
     const newTheme = theme === "dark" ? "light" : "dark";
