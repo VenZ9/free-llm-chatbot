@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const modelName = model || process.env.DEFAULT_MODEL || "google/gemma-2-9b-it:free";
 
-    const result = streamText({
+    const result = await streamText({
       model: openai(modelName),
       system: SYSTEM_PROMPT,
       messages,
